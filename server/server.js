@@ -38,19 +38,20 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (msg, callback) => {
-        console.log('createMessage', msg);
+        var user = users.getUser(socket.id);
 
-        io.emit('newMessage', generateMessage(msg.from, msg.text));
+        if(users && isRealString(msg.text)) {
+            io.to(user.room).emit('newMessage', generateMessage(user.name, msg.text));
+        }
         callback();
-        /* socket.broadcast.emit('newMessage', {
-            from: msg.from,
-            text: msg.text,
-            createdAt: new Date().getTime()
-        }); */
     });
 
     socket.on('createLocationMessage', (coords) => {
-        io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+        var user = users.getUser(socket.id);
+
+        if(users) {
+            io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+        }
     });
     
     socket.on('disconnect', () => {

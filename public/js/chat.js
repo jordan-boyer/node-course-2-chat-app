@@ -38,7 +38,7 @@ socket.on('updateUserList', function (users) {
         ul.append(jQuery('<li></li>').text(user));
     });
 
-    jQuery('#users').html(ol);
+    jQuery('#users').html(ul);
 });
 
 socket.on('newMessage', function(msg) {
@@ -73,7 +73,6 @@ jQuery('#message-form').on('submit', function (e) {
     var messageTextbox = jQuery('[name=message]')
 
     socket.emit('createMessage', {
-        from: 'User',
         text: messageTextbox.val()
     }, function () {
         messageTextbox.val('');
