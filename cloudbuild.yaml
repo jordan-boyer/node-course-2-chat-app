@@ -1,6 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/jordan-boyer/node-course-2-chat-app.git']
-  - name : "compile"
-    args: [npm i]
-    
+  - name: 'Docker Start'
+    args: ['build', '-t', 'gcr.io/nabo-webchat-app-test/github_jordan-boyer_node-course-2-chat-app', '.']
+   
