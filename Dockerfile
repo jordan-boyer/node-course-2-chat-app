@@ -4,8 +4,8 @@ RUN pwd
 RUN ls
 COPY package*.json ./
 RUN npm install
-COPY server ./
-COPY public ./
+COPY server ./server
+COPY public ./public
 RUN ls
 RUN npm run start
 EXPOSE 3000
