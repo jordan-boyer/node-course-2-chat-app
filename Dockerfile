@@ -6,5 +6,6 @@ COPY package*.json ./
 RUN npm install
 COPY server ./
 COPY public ./
+RUN ls
 RUN npm run start
 EXPOSE 3000
